@@ -111,7 +111,7 @@ class RadioTest {
     public void testIncreaseVolumeAtMax() {
         radio.setCurrentVolume(100);
         radio.increaseVolume();
-        assertEquals(100, radio.getCurrentVolume()); // не увеличивается
+        assertEquals(100, radio.getCurrentVolume());
     }
 
     @Test
@@ -125,7 +125,7 @@ class RadioTest {
     public void testDecreaseVolumeAtMin() {
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
-        assertEquals(0, radio.getCurrentVolume()); // не уменьшается
+        assertEquals(0, radio.getCurrentVolume());
     }
 
     // Дополнительные тесты на граничные условия
@@ -140,7 +140,7 @@ class RadioTest {
         for (int i = 0; i < 10; i++) {
             radio.next();
         }
-        assertEquals(0, radio.getCurrentStation()); // после 10 вызовов вернулись к 0
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
@@ -148,7 +148,7 @@ class RadioTest {
         for (int i = 0; i < 10; i++) {
             radio.prev();
         }
-        assertEquals(0, radio.getCurrentStation()); // после 10 вызовов вернулись к 0
+        assertEquals(0, radio.getCurrentStation());
     }
 
 
