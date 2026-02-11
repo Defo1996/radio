@@ -1,8 +1,15 @@
 package ru.netology;
 
+
+import lombok.Generated;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Radio {
-    private int currentStation;     // номер текущей радиостанции (0-9)
-    private int currentVolume;// громкость звука (0-100)
+    private int currentStation;
+    private int currentVolume;
     private final int totalStations;
 
     public Radio() {
@@ -14,62 +21,61 @@ public class Radio {
     public Radio(int totalStations) {
         if (totalStations <= 0) {
             throw new IllegalArgumentException("Количество станций должно быть > 0");
+        } else {
+            this.totalStations = totalStations;
+            this.currentStation = 0;
+            this.currentVolume = 0;
         }
-        this.totalStations = totalStations;
-        this.currentStation = 0;
-        this.currentVolume = 0;
     }
 
     public void next() {
-        if (currentStation == totalStations - 1) {
-            currentStation = 0;
+        if (this.currentStation == this.totalStations - 1) {
+            this.currentStation = 0;
         } else {
-            currentStation++;
+            ++this.currentStation;
         }
+
     }
 
     public void prev() {
-        if (currentStation == 0) {
-            currentStation = totalStations - 1;
+        if (this.currentStation == 0) {
+            this.currentStation = this.totalStations - 1;
         } else {
-            currentStation--;
+            --this.currentStation;
         }
+
     }
 
     public void setStation(int station) {
-        if (station >= 0 && station < totalStations) {
+        if (station >= 0 && station < this.totalStations) {
             this.currentStation = station;
         }
+
     }
 
     public void setCurrentVolume(int volume) {
         if (volume >= 0 && volume <= 100) {
             this.currentVolume = volume;
         }
+
     }
 
     public void increaseVolume() {
-        if (currentVolume < 100) {
-            currentVolume++;
+        if (this.currentVolume < 100) {
+            ++this.currentVolume;
         }
+
     }
 
     public void decreaseVolume() {
-        if (currentVolume > 0) {
-            currentVolume--;
+        if (this.currentVolume > 0) {
+            --this.currentVolume;
         }
+
     }
 
-    public int getCurrentStation() {
-        return currentStation;
+    @Generated
+    public void setCurrentStation(int currentStation) {
+        this.currentStation = currentStation;
     }
-
-    public int getCurrentVolume() {
-        return currentVolume;
-    }
-
-    public int getTotalStations() {
-        return totalStations;
-    }
-
 }
