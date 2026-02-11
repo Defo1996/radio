@@ -13,6 +13,28 @@ class RadioTest {
         radio = new Radio();
     }
 
+    // Тесты для конструктора по умолчанию
+    @Test
+    void testDefaultConstructor() {
+        assertEquals(10, radio.getTotalStations());
+        assertEquals(0, radio.getCurrentStation());
+        assertEquals(0,radio.getCurrentVolume());
+    }
+
+    // Тесты для конструктора по умолчанию
+    @Test
+    void testConstructorWithStstions() {
+        Radio radio5 = new Radio(5);
+        assertEquals(5, radio5.getTotalStations());
+        assertEquals(0, radio5.getCurrentStation() );
+    }
+
+    @Test
+    void testConstructorInvalidsStations() {
+        assertThrows(IllegalArgumentException.class, () -> new Radio(0));
+        assertThrows(IllegalArgumentException.class, () -> new Radio(-1));
+    }
+
     // Тестирование переключения станций
     @Test
     public void testNextStationFrom0To1() {
@@ -56,10 +78,37 @@ class RadioTest {
         assertEquals(9, radio.getCurrentStation());
     }
 
+    // Тест для радио с 5 станциями
+    @Test
+    void testPrevWith5Stations() {
+        Radio radio5 = new Radio(5);
+        radio5.setStation(0);
+        radio5.prev();
+        assertEquals(4, radio5.getCurrentStation());
+    }
+
+    @Test
+    void testNextWith5Stations() {
+        Radio radio5 = new Radio(5);
+        radio5.setStation(4);
+        radio5.next();
+        assertEquals(0, radio5.getCurrentStation());
+    }
+
+    // Тест сеттера станций
     @Test
     public void testSetStationValid() {
         radio.setStation(5);
         assertEquals(5, radio.getCurrentStation());
+    }
+
+    @Test
+    void testSetStationInvalid() {
+        radio.setStation(-1);
+        assertEquals(0, radio.getCurrentStation());
+
+        radio.setStation(10);
+        assertEquals(0, radio.getCurrentStation());
     }
 
     @Test
@@ -151,5 +200,10 @@ class RadioTest {
         assertEquals(0, radio.getCurrentStation());
     }
 
+    @Test
+    void testGetTotalStations() {
+        Radio radio3 = new Radio(3);
+        assertEquals(3, radio3.getTotalStations());
+    }
 
 }
