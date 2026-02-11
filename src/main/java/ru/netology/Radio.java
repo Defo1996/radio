@@ -2,15 +2,26 @@ package ru.netology;
 
 public class Radio {
     private int currentStation;     // номер текущей радиостанции (0-9)
-    private int currentVolume;      // громкость звука (0-100)
+    private int currentVolume;// громкость звука (0-100)
+    private final int totalStations;
 
     public Radio() {
+        this.totalStations = 10;
+        this.currentStation = 0;
+        this.currentVolume = 0;
+    }
+
+    public Radio(int totalStations) {
+        if (totalStations <= 0) {
+            throw new IllegalArgumentException("Количество станций должно быть > 0");
+        }
+        this.totalStations = totalStations;
         this.currentStation = 0;
         this.currentVolume = 0;
     }
 
     public void next() {
-        if (currentStation == 9) {
+        if (currentStation == totalStations - 1) {
             currentStation = 0;
         } else {
             currentStation++;
@@ -19,14 +30,14 @@ public class Radio {
 
     public void prev() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = totalStations - 1;
         } else {
             currentStation--;
         }
     }
 
     public void setStation(int station) {
-        if (station >= 0 && station <= 9) {
+        if (station >= 0 && station < totalStations) {
             this.currentStation = station;
         }
     }
@@ -55,6 +66,10 @@ public class Radio {
 
     public int getCurrentVolume() {
         return currentVolume;
+    }
+
+    public int getTotalStations() {
+        return totalStations;
     }
 
 }
