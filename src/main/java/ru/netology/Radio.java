@@ -3,9 +3,7 @@ package ru.netology;
 
 import lombok.Generated;
 import lombok.Getter;
-import lombok.Setter;
 
-@Setter
 @Getter
 public class Radio {
     private int currentStation;
@@ -26,6 +24,17 @@ public class Radio {
             this.currentStation = 0;
             this.currentVolume = 0;
         }
+
+    }
+
+    public void setStation(int station) {
+        if (station < 0 || station >= totalStations) {
+            throw new IllegalArgumentException(
+                    String.format("Станция %d недопустима. Допустимый диапазон: 0–%d",
+                            station, totalStations - 1)
+            );
+        }
+        this.currentStation = station;
     }
 
     public void next() {
@@ -46,12 +55,6 @@ public class Radio {
 
     }
 
-    public void setStation(int station) {
-        if (station >= 0 && station < this.totalStations) {
-            this.currentStation = station;
-        }
-
-    }
 
     public void setCurrentVolume(int volume) {
         if (volume >= 0 && volume <= 100) {
@@ -74,8 +77,4 @@ public class Radio {
 
     }
 
-    @Generated
-    public void setCurrentStation(int currentStation) {
-        this.currentStation = currentStation;
-    }
 }
