@@ -137,7 +137,7 @@ class RadioTest {
     @Test
     void testDecreaseVolumeNormal() {
         radio.setCurrentVolume(50);
-        radio.decreaseVolume(); // Исправить опечатку в названии метода!
+        radio.decreaseVolume();
         assertEquals(49, radio.getCurrentVolume());
     }
 
@@ -145,6 +145,24 @@ class RadioTest {
     void testDecreaseVolumeAtMin() {
         radio.setCurrentVolume(0);
         radio.decreaseVolume();
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    void testSetCurrentVolume_Valid() {
+        radio.setCurrentVolume(50);
+        assertEquals(50, radio.getCurrentVolume());
+    }
+
+    @Test
+    void testSetCurrentVolume_Negative() {
+        radio.setCurrentVolume(-1);
+        assertEquals(0, radio.getCurrentVolume());
+    }
+
+    @Test
+    void testSetCurrentVolume_AboveMax() {
+        radio.setCurrentVolume(101);
         assertEquals(0, radio.getCurrentVolume());
     }
 
